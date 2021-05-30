@@ -1,6 +1,8 @@
 import requests
 import pytest
 
+
+
 def test_create_role(book , base_url):
     role_data = {"name": "Unknown", "type": "Drama","level": 2 , "book"  : book["id"]}
     resp = requests.post(f"{base_url}/roles", data = role_data)
@@ -32,31 +34,19 @@ payload_list = [
 ]
 @pytest.mark.parametrize("role_data" , payload_list)
 
-def test_update_role_level_out_of_range_max(role_data, role, book , base_url):
+def test_update_role(role_data, role, book , base_url):
     # role_data = {"level": 2147483648 }
     respose = requests.put(f"{base_url}/roles/{role['id']}" , data = role_data)
     resp_body = respose.json()
     assert respose.status_code == 400
     print(resp_body)
 
-# def test_update_role_level_out_of_range_min(role, book , base_url):
-#     role_data = {"level": -2147483649 }
-#     respose = requests.put(f"{base_url}/roles/{role['id']}" , data = role_data)
-#     resp_body = respose.json()
-#     assert respose.status_code == 400
-#     print(resp_body)
 
-# def test_update_role_level_incorrect_type(role, book , base_url):
-#     role_data = {"level": "v" }
-#     respose = requests.put(f"{base_url}/roles/{role['id']}" , data = role_data)
-#     resp_body = respose.json()
-#     assert respose.status_code == 400
-#     print(resp_body)
 
 
 payload_list = [
     { "type": "Drama","level": 2 },
-    { "name": "Unknown", "type": "Drama","level": 2   }
+
 ]
 
 @pytest.mark.parametrize("role_data",payload_list)
@@ -68,18 +58,18 @@ def test_create_role_without_name(role_data,book , base_url):
     assert resp.status_code == 400
     print(resp.json())
 
+""" этот тест у меня не работает :"""
+payload_list = [
 
+    { "name": "Unknown", "type": "Drama","level": 2   }
+]
+@pytest.mark.parametrize("role_data",payload_list)
 def test_create_role_without_id(role_data, book , base_url):
-    payload_list.append({  "book"  : book["id"]+1})
+    payload_list.append({  "book"  : book["id"]+1 })
     resp = requests.post(f"{base_url}/roles", data = role_data)
-    assert resp.status_code == 400
     print(resp.json())
+    assert resp.status_code == 400
 
-# def test_update_role_type_out_of_range(role, book , base_url):
-    # role_data = {"type": 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999 }
-    # respose = requests.put(f"{base_url}/roles/{role['id']}" , data = role_data)
-    # resp_body = respose.json()
-    # assert respose.status_code == 400
-    # print(resp_body)
+
 
 

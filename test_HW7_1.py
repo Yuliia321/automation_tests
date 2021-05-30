@@ -1,5 +1,6 @@
 import requests
 
+
 def test_create_role(book , base_url):
     role_data = {"name": "Unknown", "type": "Drama","level": 2 , "book"  : book["id"]}
     resp = requests.post(f"{base_url}/roles", data = role_data)
