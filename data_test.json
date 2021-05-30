@@ -1,0 +1,16 @@
+[
+    { 
+        "name": "Aberforth Dumbledore",
+        "type": "Senior Wizard",
+        "level": 100500
+    },
+    {        
+        "name": "Harry Potter",
+        "type": "Wizard",
+        "level": 1
+    },
+    {
+        "name": "Hermione Granger",
+        "type": "Student at Hogwarts",
+        "level": 2
+    }]

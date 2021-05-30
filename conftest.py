@@ -1,5 +1,6 @@
 import pytest
 import requests
+import json
 
 
 @pytest.fixture()
@@ -23,3 +24,14 @@ def role(book, base_url):
     role = resp.json()
     yield role
     resp = requests.delete(f"{base_url}/roles/{role['id']}")
+
+
+
+with open('data_test.json') as f:
+        x = f.read()
+        role_payload_list = json.loads(x)
+
+@pytest.fixture(params=role_payload_list)
+def role_payload(request):
+    return request.param
+
